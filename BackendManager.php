@@ -1,4 +1,5 @@
-<?php /*
+<?php
+/*
  * Plugin Name:       Backend Manager
  * Plugin URI:        https://example.com/plugins/the-basics/
  * Description:       Handle the basics with this plugin.
@@ -13,4 +14,9 @@
  * Text Domain:       my-basics-plugin
  * Domain Path:       /languages 
  */
+
 require_once __DIR__ . "/vendor/autoload.php";
+use BackendManager\includes\Register_custom_posts_and_taxonomy;
+
+add_theme_support('post-thumbnails');
+new Register_custom_posts_and_taxonomy();
