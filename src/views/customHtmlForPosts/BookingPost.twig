@@ -1,9 +1,13 @@
 <p>
     <label for="booking_date">Date:</label>
-    <input type="date" id="booking_date" name="booking_date" value="{{ $booking_date }}"/>
+    <input type="date" id="booking_date" name="booking_date" value="{{ booking_date }}"/>
 </p>
 <p>
     <label for="booking_time">Time:</label>
-    <input type="time" id="booking_time" name="booking_time" value="{{ $booking_time }}"/>
+    <input type="time" id="booking_time" name="booking_time" value="{{ booking_time }}"/>
+</p>
+<p>
+    <label for="customer_name">Time:</label>
+    <input type="text" id="customer_name" name="c_name" value="{{ name|escape }}"/>
 </p>
 

@@ -16,7 +16,7 @@
  */
 
 require_once __DIR__ . "/vendor/autoload.php";
-use BackendManager\includes\Register_custom_posts_and_taxonomy;
 
-add_theme_support('post-thumbnails');
-new Register_custom_posts_and_taxonomy();
+use BackendManager\includes\Bookings;
+
+$setupTheme = new Bookings();

@@ -1,5 +1,7 @@
 <?php
+
 declare(strict_types=1);
+
 namespace BackendManager\includes;
 
 if (!defined('ABSPATH'))
@@ -7,57 +9,44 @@ if (!defined('ABSPATH'))
 
 class Register_custom_posts_and_taxonomy
 {
-  public function __construct()
-  {
+  public function __construct() {
+    add_theme_support('post-thumbnails');
     add_action(hook_name: "init", callback: [$this, "AllCustomPostName"]);
   }
   public function AllCustomPostName()
   {
-    return [
-      "Property" => $this->setArgForPosts(
-        "Properties",
-        "property",
-        true,
-        "dashicons-book",
-        true,
-        ['slug' => 'properties'],
-        ['title', 'editor', 'thumbnail', 'custom-fields'],
-        true
-      ),
-      "Book" => $this->setArgForPosts(
-        "Books",
-        "book",
-        true,
-        "dashicons-book",
-        true,
-        ['slug' => 'Books'],
-        ['title', 'editor', 'thumbnail', 'custom-fields'],
-        true
-      ),
-    ];
+    $this->setArgForPostsAndRegister(
+      "Bookings",
+      "booking",
+      true,
+      "dashicons-book",
+      true,
+      ['slug' => 'Bookings'],
+      ['title', 'editor', 'thumbnail', 'custom-fields'],
+      true
+    );
   }
-  public function setArgForPosts($name, $singleName, $public, $menuIcon, $has_archive, $rewrite, $supports, $showInRest)
+  public function setArgForPostsAndRegister($name, $slug, $public, $menuIcon, $has_archive, $rewrite, $supports, $showInRest)
   {
     $arg = [
       'labels' => [
-        'name' => $name,
-        'singular_name' => $singleName,
-        'menu_name' => $name,
-        'add_new' => "Add New {$singleName}",
-        'add_new_item' => "Add New {$singleName}",
-        'new_item' => "New {$singleName}",
-        'edit_item' => "Edit {$singleName}",
-        'view_item' => 'View {$singleName}',
-        'all_items' => "All {$name}",
+        'name' => __($name, 'backend-manager'),
+        'singular_name' => __($slug, 'backend-manager'),
+        'menu_name' => __($name, 'backend-manager'),
+        'add_new' => __('Add New', 'backend-manager'),
+        'add_new_item' => __("Add New $slug", 'backend-manager'),
+        'new_item' => __("New $slug", 'backend-manager'),
+        'edit_item' => __("Edit $slug", 'backend-manager'),
+        'view_item' => __("View $slug", 'backend-manager'),
+        'all_items' => __("All {$name}", 'backend-manager'),
       ],
       "public" => $public,
-      "menu-icon" => $menuIcon,
+      "menu_icon" => $menuIcon,
       "has_archive" => $has_archive,
       "rewrite" => $rewrite,
       "supports" => $supports,
       "show_in_rest" => $showInRest
     ];
-    register_post_type($name, $arg);
+    register_post_type($slug, $arg);
   }
-
 }
